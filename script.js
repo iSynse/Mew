@@ -306,6 +306,7 @@
   // ---------- Music toggle ----------
   const musicBtn = document.getElementById('musicToggle');
   const audio = document.getElementById('bgMusic');
+  audio.volume = 0.5;
   const labelEl = musicBtn.querySelector('.music-label');
 
   musicBtn.addEventListener('click', () => {
