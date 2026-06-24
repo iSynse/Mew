@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Proud of You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Music control -->
+  <button id="musicToggle" class="music-btn" aria-label="Play background music">
+    <svg class="icon icon-play" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7 4.5C7 3.67 7.93 3.16 8.63 3.6L18.63 10.1C19.3 10.53 19.3 11.47 18.63 11.9L8.63 18.4C7.93 18.84 7 18.33 7 17.5V4.5Z" fill="currentColor"/>
+    </svg>
+    <svg class="icon icon-pause" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="6" y="4" width="4" height="16" rx="1.2" fill="currentColor"/>
+      <rect x="14" y="4" width="4" height="16" rx="1.2" fill="currentColor"/>
+    </svg>
+    <span class="music-label">Play music</span>
+  </button>
+  <audio id="bgMusic" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Scroll progress hint -->
+  <div class="scroll-hint" id="scrollHint">
+    <span>scroll</span>
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 4V20M12 20L6 14M12 20L18 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <!-- Fixed visual stage -->
+  <div class="stage">
+    <div class="sky"></div>
+    <div class="ground-glow"></div>
+
+    <svg class="garden-svg" id="gardenSvg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="stemGrad" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stop-color="#3f5c34"/>
+          <stop offset="55%" stop-color="#6f9656"/>
+          <stop offset="100%" stop-color="#9ec47f"/>
+        </linearGradient>
+
+        <radialGradient id="petalGrad" cx="35%" cy="20%" r="90%">
+          <stop offset="0%" stop-color="#fff8f3"/>
+          <stop offset="45%" stop-color="#f2d9e6"/>
+          <stop offset="100%" stop-color="#c98fb0"/>
+        </radialGradient>
+
+        <radialGradient id="petalGradAlt" cx="40%" cy="15%" r="95%">
+          <stop offset="0%" stop-color="#fffaf2"/>
+          <stop offset="50%" stop-color="#f6e3c9"/>
+          <stop offset="100%" stop-color="#d8a9c4"/>
+        </radialGradient>
+
+        <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#f7b95e"/>
+          <stop offset="100%" stop-color="#c97a3d"/>
+        </radialGradient>
+
+        <filter id="softBlur" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3"/>
+        </filter>
+      </defs>
+
+      <!-- Leaves + stem path drawn dynamically by JS -->
+      <g id="leavesLayer"></g>
+      <path id="stemPath" d="" fill="none" stroke="url(#stemGrad)" stroke-width="6" stroke-linecap="round" />
+
+      <!-- Lilies injected here by JS -->
+      <g id="liliesLayer"></g>
+    </svg>
+
+    <div class="vignette"></div>
+
+    <div class="message" id="finalMessage">
+      <span class="message-eyebrow">always</span>
+      <h1>Proud of you</h1>
+      <span class="message-underline"></span>
+    </div>
+  </div>
+
+  <!-- Scroll-driving spacer content -->
+  <main class="scroll-spacer">
+    <section class="beat" data-beat="0">
+      <p class="beat-text">for every quiet step<br>nobody saw you take</p>
+    </section>
+    <section class="beat" data-beat="1">
+      <p class="beat-text">for the mornings<br>you began again</p>
+    </section>
+    <section class="beat" data-beat="2">
+      <p class="beat-text">for holding on<br>through the hard parts</p>
+    </section>
+    <section class="beat" data-beat="3">
+      <p class="beat-text">look how far<br>you've grown</p>
+    </section>
+    <section class="beat beat-final" data-beat="4"></section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
