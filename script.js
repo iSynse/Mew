@@ -309,15 +309,26 @@
   audio.volume = 0.5;
   const labelEl = musicBtn.querySelector('.music-label');
 
-  musicBtn.addEventListener('click', () => {
+  musicBtn.addEventListener('click', async () => {
     if (audio.paused) {
-      audio.play().then(() => {
+      try {
+        await audio.play();
         musicBtn.classList.add('playing');
         labelEl.textContent = 'Pause music';
         musicBtn.setAttribute('aria-label', 'Pause background music');
-      }).catch(() => {
+      } catch (err) {
+        console.error('Audio play failed:', err);
         labelEl.textContent = 'Music unavailable';
-      });
+        musicBtn.setAttribute('aria-label', 'Music unavailable');
+        // Try reloading the audio source; a subsequent user gesture may succeed.
+        try {
+          audio.load();
+        } catch (e) {
+          // ignore load errors
+        }
+        // Provide a tooltip hint for debugging in the UI
+        musicBtn.title = 'Music unavailable — check audio file or browser settings';
+      }
     } else {
       audio.pause();
       musicBtn.classList.remove('playing');
